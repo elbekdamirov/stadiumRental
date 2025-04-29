@@ -8,12 +8,13 @@ const {
   getUsersByAnyParams,
   findOwnerStadiums,
   getUserReviews,
+  callProcedureUsers,
 } = require("../controllers/users.controller");
 
 const router = require("express").Router();
 
 router.post("/create", createUser);
-router.get("/all", getAllUsers);
+router.get("/all", callProcedureUsers);
 router.get("/role", getUserByRole);
 router.get("/any", getUsersByAnyParams);
 router.get("/ownerstadiums", findOwnerStadiums);

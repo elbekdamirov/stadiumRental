@@ -75,9 +75,10 @@ const removeStadiumById = (req, res) => {
 
 const getStadiumByPrice = (req, res) => {
   db.query(
-    `SELECT s.name, s.location, s.price, b.start_time, b.end_time FROM stadium s
-    LEFT JOIN booking b ON b.stadion_id = s.id
-    WHERE price BETWEEN 3000 AND 5000 AND end_time - start_time >= 2`,
+    `select s.name,s.address, s.location, s.price,  b.start_time, b.end_time from stadium s
+     join booking b on s.id = b.stadion_id
+     where s.price > ${start_price} and s.price < ${end_price} and 
+     TIME_TO_SEC(TIMEDIFF(b.end_time, b.start_time)) >= 3600*2`,
     (error, result) => {
       if (error) {
         console.log(`Error get all users by phone`, error);

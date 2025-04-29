@@ -81,3 +81,65 @@ WHERE phone="998911234567"
 SELECT s.name, s.location, s.price, b.start_time, b.end_time FROM stadium s
 LEFT JOIN booking b ON b.stadion_id = s.id
 WHERE 3000 <= price <= 5000 AND end_time - start_time >= 2
+
+DROP PROCEDURE IF EXISTS getAllUsers
+
+CREATE PROCEDURE IF NOT EXISTS getAllUsers()
+BEGIN
+    SELECT * FROM users;
+END
+
+CALL getAllUsers
+
+CREATE PROCEDURE IF NOT EXISTS getUserById(IN userId INT)
+BEGIN
+    SELECT * FROM users WHERE id = userId;
+END
+
+CALL `getUserById`(2)
+
+CREATE PROCEDURE IF NOT EXISTS getUserName(IN userId INT, OUT userName VARCHAR(50))
+BEGIN
+    SELECT first_name into userName FROM users WHERE id = userId;
+END
+
+CALL `getUserName`(2, @userName)
+
+SELECT @userName
+
+CREATE PROCEDURE IF NOT EXISTS res_out(INOUT res INT)
+BEGIN
+    SET res = res - 10;
+END
+
+SET @res=100
+
+CALL res_out(@res)
+
+SELECT @res
+
+
+CREATE PROCEDURE IF NOT EXISTS stadium_out(INOUT res INT)
+BEGIN
+    SET res = res + 100;
+END
+
+
+
+CALL stadium_out(@res);
+
+SELECT @res;
+
+
+SELECT @res
+
+
+
+CREATE FUNCTION if NOT EXISTS myFUNC1() RETURNS INT DETERMINISTIC
+BEGIN
+    DECLARE sum INT DEFAULT 0;
+    SELECT COUNT(*) INTO sum  FROM stadium;
+    RETUrn sum;
+END
+
+SELECT `myFUNC1`()

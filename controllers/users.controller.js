@@ -153,6 +153,16 @@ const getUserReviews = (req, res) => {
   );
 };
 
+const callProcedureUsers = (req, res) => {
+  db.query("call getAllUsers()", (error, result) => {
+    if (error) {
+      console.log(`Error get all users`, error);
+      return res.status(500).send({ message: "Serverda xatolik" });
+    }
+    res.send(result[0]);
+  });
+};
+
 module.exports = {
   createUser,
   getAllUsers,
@@ -163,4 +173,5 @@ module.exports = {
   getUsersByAnyParams,
   findOwnerStadiums,
   getUserReviews,
+  callProcedureUsers,
 };
