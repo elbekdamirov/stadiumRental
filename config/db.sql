@@ -59,3 +59,23 @@ CREATE TABLE `images`(
 );
 
 SHOW TABLES
+
+SELECT u.first_name, u.phone, s.name, i.image_url FROM users u
+LEFT JOIN stadium s ON u.id = s.owner_id
+LEFT JOIN images i ON s.id = i.stadion_id
+WHERE first_name="Ali" AND last_name = "Karimov"
+
+SELECT u.first_name, u.last_name, s.name, b.booking_date FROM booking b
+LEFT JOIN stadium s ON b.stadion_id = s.id
+LEFT JOIN users u ON b.user_id = u.id
+WHERE b.booking_date BETWEEN "2025-03-01" AND "2025-04-28"
+AND s.name LIKE '%Arena'
+
+SELECT * FROM users
+
+SELECT u.first_name, u.phone, s.name, r.rating, r.comment FROM users u
+LEFT JOIN review r ON r.user_id = u.id
+LEFT JOIN stadium s ON s.id = r.stadion_id
+WHERE phone="998911234567"
+
+SELECT * FROM users
