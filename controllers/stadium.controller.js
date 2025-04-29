@@ -74,6 +74,8 @@ const removeStadiumById = (req, res) => {
 };
 
 const getStadiumByPrice = (req, res) => {
+  let { start_price, end_price } = req.body;
+
   db.query(
     `select s.name,s.address, s.location, s.price,  b.start_time, b.end_time from stadium s
      join booking b on s.id = b.stadion_id
