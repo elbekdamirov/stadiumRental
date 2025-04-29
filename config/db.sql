@@ -71,11 +71,13 @@ LEFT JOIN users u ON b.user_id = u.id
 WHERE b.booking_date BETWEEN "2025-03-01" AND "2025-04-28"
 AND s.name LIKE '%Arena'
 
-SELECT * FROM users
+SELECT * FROM booking
 
 SELECT u.first_name, u.phone, s.name, r.rating, r.comment FROM users u
 LEFT JOIN review r ON r.user_id = u.id
 LEFT JOIN stadium s ON s.id = r.stadion_id
 WHERE phone="998911234567"
 
-SELECT * FROM users
+SELECT s.name, s.location, s.price, b.start_time, b.end_time FROM stadium s
+LEFT JOIN booking b ON b.stadion_id = s.id
+WHERE 3000 <= price <= 5000 AND end_time - start_time >= 2

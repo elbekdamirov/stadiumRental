@@ -145,7 +145,7 @@ const getUserReviews = (req, res) => {
     WHERE phone='${phone}'`,
     (error, result) => {
       if (error) {
-        console.log(`Error get all users by role`, error);
+        console.log(`Error get all users by phone`, error);
         return res.status(500).send({ message: "Serverda xatolik" });
       }
       res.send(result);

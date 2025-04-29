@@ -73,10 +73,26 @@ const removeStadiumById = (req, res) => {
   });
 };
 
+const getStadiumByPrice = (req, res) => {
+  db.query(
+    `SELECT s.name, s.location, s.price, b.start_time, b.end_time FROM stadium s
+    LEFT JOIN booking b ON b.stadion_id = s.id
+    WHERE price BETWEEN 3000 AND 5000 AND end_time - start_time >= 2`,
+    (error, result) => {
+      if (error) {
+        console.log(`Error get all users by phone`, error);
+        return res.status(500).send({ message: "Serverda xatolik" });
+      }
+      res.send(result);
+    }
+  );
+};
+
 module.exports = {
   getStadiumAll,
   getOneStadiumById,
   createStadium,
   updateStadiumById,
   removeStadiumById,
+  getStadiumByPrice,
 };
